@@ -1,7 +1,5 @@
 name: 'setup-goplus'
 description: 'Setup a Go+ environment and add it to the PATH'
-icon-badge: 'arrow-up-circle'
-color: 'blue'
 author: 'GoPlus Team'
 inputs:
   gop-version:
