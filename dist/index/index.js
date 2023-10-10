@@ -65026,9 +65026,10 @@ const child_process_1 = __nccwpck_require__(81);
 async function installGop() {
     try {
         const versionSpec = resolveVersionInput();
-        const gopDir = clone(versionSpec);
+        const version = `v${versionSpec}`;
+        const gopDir = clone(version);
         install(gopDir);
-        test(versionSpec);
+        test(version);
         core.setOutput('gop-version', versionSpec);
     }
     catch (error) {

@@ -11,9 +11,10 @@ import { execSync } from 'child_process'
 export async function installGop(): Promise<void> {
   try {
     const versionSpec = resolveVersionInput()
-    const gopDir = clone(versionSpec)
+    const version = `v${versionSpec}`
+    const gopDir = clone(version)
     install(gopDir)
-    test(versionSpec)
+    test(version)
     core.setOutput('gop-version', versionSpec)
   } catch (error) {
     // Fail the workflow run if an error occurs

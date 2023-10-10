@@ -53,7 +53,8 @@ jobs:
         id: test-action
         uses: ./
         with:
-          gop-version: v1.1.7
+          go-version: '1.21.0'
+          gop-version: '1.1.7'
 
       - name: Print Output
         id: output
