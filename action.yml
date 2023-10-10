@@ -51,6 +51,10 @@ outputs:
 runs:
   using: 'composite'
   steps:
+    - name: 'Setup Node.js'
+      uses: 'actions/setup-node@v3'
+      with:
+        node-version: '20'
     - name: 'Setup Go'
       uses: 'actions/setup-go@v1'
       with:
@@ -62,8 +66,7 @@ runs:
         cache-dependency-path: ${{ inputs.cache-dependency-path }}
         architecture: ${{ inputs.architecture }}
     - name: 'Setup Go+'
-      using: 'node20'
-      main: 'dist/index/index.js'
+      run: node dist/index/index.js
       with:
         gop-version: ${{ inputs.gop-version }}
         gop-version-file: ${{ inputs.gop-version-file }}
