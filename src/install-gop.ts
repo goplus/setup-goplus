@@ -38,6 +38,7 @@ function clone(versionSpec: string): string {
 function install(gopDir: string): void {
   core.info(`Installing gop ${gopDir} ...`)
   execSync(`ls ${os.homedir()}`)
+  console.log('PATH:', process.env.PATH)
   const bin = path.join(os.homedir(), 'bin')
   execSync('go run cmd/make.go -install', {
     cwd: gopDir,
