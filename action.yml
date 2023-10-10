@@ -55,19 +55,7 @@ runs:
       uses: 'actions/setup-node@v3'
       with:
         node-version: '20'
-    - name: 'Setup Go'
-      uses: 'actions/setup-go@v1'
-      with:
-        go-version: ${{ inputs.go-version }}
-        go-version-file: ${{ inputs.go-version-file }}
-        check-latest: ${{ inputs.check-latest }}
-        token: ${{ inputs.token }}
-        cache: ${{ inputs.cache }}
-        cache-dependency-path: ${{ inputs.cache-dependency-path }}
-        architecture: ${{ inputs.architecture }}
+    - uses: 'actions/setup-go@v4'
     - name: 'Setup Go+'
       run: node dist/index/index.js
       shell: bash
-      with:
-        gop-version: ${{ inputs.gop-version }}
-        gop-version-file: ${{ inputs.gop-version-file }}
