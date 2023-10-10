@@ -1,6 +1,8 @@
-name: 'goplus/setup-goplus'
+name: 'setup-goplus'
 description: 'Setup a Go+ environment and add it to the PATH'
-author: 'GitHub'
+icon: 'arrow-up-circle'
+color: 'blue'
+author: 'GoPlus Team'
 inputs:
   gop-version:
     description:
