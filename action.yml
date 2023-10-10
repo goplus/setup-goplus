@@ -67,6 +67,7 @@ runs:
         architecture: ${{ inputs.architecture }}
     - name: 'Setup Go+'
       run: node dist/index/index.js
+      shell: bash
       with:
         gop-version: ${{ inputs.gop-version }}
         gop-version-file: ${{ inputs.gop-version-file }}
