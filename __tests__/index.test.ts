@@ -2,16 +2,18 @@
  * Unit tests for the action's entrypoint, src/index.ts
  */
 
-import * as main from '../src/main'
+import exp from 'constants'
+import * as main from '../src/install-gop'
 
 // Mock the action's entrypoint
-const runMock = jest.spyOn(main, 'run').mockImplementation()
+const installGopMock = jest.spyOn(main, 'installGop').mockImplementation()
 
 describe('index', () => {
-  it('calls run when imported', async () => {
+  it('calls installGop when imported', async () => {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    require('../src/index')
-
-    expect(runMock).toHaveBeenCalled()
+    console.log('+++++++++')
+    console.log(require('../src/index'))
+    console.log('------------')
+    expect(installGopMock).toHaveBeenCalled()
   })
 })

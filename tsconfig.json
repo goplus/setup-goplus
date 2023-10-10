@@ -12,7 +12,9 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "allowJs": true,
     "skipLibCheck": true,
+    "noEmit": true,
     "newLine": "lf"
   },
   "exclude": ["./dist", "./node_modules", "./__tests__", "./coverage"]
