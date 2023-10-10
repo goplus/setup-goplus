@@ -65053,8 +65053,6 @@ function clone(versionSpec) {
 }
 function install(gopDir) {
     core.info(`Installing gop ${gopDir} ...`);
-    (0, child_process_1.execSync)(`ls ${os_1.default.homedir()}`);
-    console.log('PATH:', process.env.PATH);
     const bin = path_1.default.join(os_1.default.homedir(), 'bin');
     (0, child_process_1.execSync)('go run cmd/make.go -install', {
         cwd: gopDir,
@@ -65064,6 +65062,7 @@ function install(gopDir) {
             GOBIN: bin
         }
     });
+    core.addPath(bin);
     core.info('gop installed');
 }
 function test(versionSpec) {
