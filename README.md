@@ -164,7 +164,7 @@ steps:
 
   - name: Print Output
     id: output
-    run: echo "${{ steps.test-action.outputs.time }}"
+    run: echo "${{ steps.test-action.outputs.gop-version }}"
 ```
 
 For example workflow runs, check out the
@@ -195,5 +195,5 @@ steps:
 
   - name: Print Output
     id: output
-    run: echo "${{ steps.test-action.outputs.time }}"
+    run: echo "${{ steps.test-action.outputs.gop-version }}"
 ```

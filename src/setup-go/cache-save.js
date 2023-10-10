@@ -1,5 +1,5 @@
-const cacheSave = require('setup-go/dist/cache-save')
-
-export async function cacheSaveGo() {
-  await cacheSave()
+function cacheSaveGo() {
+  import('setup-go/dist/cache-save')
 }
+
+export default cacheSaveGo

@@ -10,16 +10,13 @@ import * as core from '@actions/core'
 import * as main from '../src/install-gop'
 
 // Mock the GitHub Actions core library
-const debugMock = jest.spyOn(core, 'debug')
+// const debugMock = jest.spyOn(core, 'debug')
 const getInputMock = jest.spyOn(core, 'getInput')
-const setFailedMock = jest.spyOn(core, 'setFailed')
+// const setFailedMock = jest.spyOn(core, 'setFailed')
 const setOutputMock = jest.spyOn(core, 'setOutput')
 
 // Mock the action's main function
 const installGopMock = jest.spyOn(main, 'installGop')
-
-// Other utilities
-const timeRegex = /^\d{2}:\d{2}:\d{2}/
 
 describe('action', () => {
   beforeEach(() => {

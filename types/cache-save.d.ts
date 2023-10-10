@@ -1,1 +1,1 @@
-export function cacheSaveGo(): Promise<void>
+export default function cacheSaveGo(): Promise<void>

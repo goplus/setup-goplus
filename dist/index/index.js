@@ -64946,13 +64946,37 @@ exports["default"] = _default;
 "use strict";
 __nccwpck_require__.r(__webpack_exports__);
 /* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
-/* harmony export */   "setupGo": () => (/* binding */ setupGo)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-const setup = __nccwpck_require__(371)
-
-async function setupGo() {
-  await setup()
+function setupGo() {
+  __nccwpck_require__(371)
 }
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (setupGo);
+
+
+/***/ }),
+
+/***/ 144:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+/**
+ * The entrypoint for the action.
+ */
+const setup_1 = __importDefault(__nccwpck_require__(641));
+const install_gop_1 = __nccwpck_require__(119);
+async function run() {
+    (0, setup_1.default)();
+    await (0, install_gop_1.installGop)();
+}
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
+run();
 
 
 /***/ }),
@@ -64998,11 +65022,9 @@ const path_1 = __importDefault(__nccwpck_require__(17));
  * @returns {Promise<void>} Resolves when the action is complete.
  */
 async function installGop() {
-    console.log('run =====');
     try {
         const versionSpec = resolveVersionInput();
         core.setOutput('gop-version', versionSpec);
-        console.log('after run =====');
     }
     catch (error) {
         // Fail the workflow run if an error occurs
@@ -65260,28 +65282,12 @@ module.exports = require("zlib");
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
 /******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
-(() => {
-"use strict";
-var exports = __webpack_exports__;
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-/**
- * The entrypoint for the action.
- */
-const setup_1 = __nccwpck_require__(641);
-const install_gop_1 = __nccwpck_require__(119);
-console.log('============== index');
-async function run() {
-    await (0, setup_1.setupGo)();
-    await (0, install_gop_1.installGop)();
-}
-// eslint-disable-next-line @typescript-eslint/no-floating-promises
-run();
-
-})();
-
-module.exports = __webpack_exports__;
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = __nccwpck_require__(144);
+/******/ 	module.exports = __webpack_exports__;
+/******/ 	
 /******/ })()
 ;
