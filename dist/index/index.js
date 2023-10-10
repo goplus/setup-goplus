@@ -65017,6 +65017,8 @@ exports.parseGopVersionFile = exports.installGop = void 0;
 const core = __importStar(__nccwpck_require__(186));
 const fs_1 = __importDefault(__nccwpck_require__(147));
 const path_1 = __importDefault(__nccwpck_require__(17));
+const os_1 = __importDefault(__nccwpck_require__(37));
+const child_process_1 = __nccwpck_require__(81);
 /**
  * The main function for the action.
  * @returns {Promise<void>} Resolves when the action is complete.
@@ -65024,6 +65026,9 @@ const path_1 = __importDefault(__nccwpck_require__(17));
 async function installGop() {
     try {
         const versionSpec = resolveVersionInput();
+        const gopDir = clone(versionSpec);
+        install(gopDir);
+        test(versionSpec);
         core.setOutput('gop-version', versionSpec);
     }
     catch (error) {
@@ -65033,6 +65038,43 @@ async function installGop() {
     }
 }
 exports.installGop = installGop;
+function clone(versionSpec) {
+    // git clone https://github.com/goplus/gop.git with tag $versionSpec to $HOME/workdir/gop
+    const workDir = path_1.default.join(os_1.default.homedir(), 'workdir');
+    if (fs_1.default.existsSync(workDir)) {
+        fs_1.default.rmSync(workDir, { recursive: true });
+    }
+    fs_1.default.mkdirSync(workDir);
+    core.info(`Cloning gop ${versionSpec} to ${workDir} ...`);
+    const cmd = `git clone --depth 1 --branch ${versionSpec} https://github.com/goplus/gop.git`;
+    (0, child_process_1.execSync)(cmd, { cwd: workDir, stdio: 'inherit' });
+    core.info('gop cloned');
+    return path_1.default.join(workDir, 'gop');
+}
+function install(gopDir) {
+    core.info(`Installing gop ${gopDir} ...`);
+    const bin = path_1.default.join(os_1.default.homedir(), 'bin');
+    (0, child_process_1.execSync)('go run cmd/make.go -install', {
+        cwd: gopDir,
+        stdio: 'inherit',
+        env: {
+            ...process.env,
+            GOBIN: bin
+        }
+    });
+    core.addPath(bin);
+    core.info('gop installed');
+}
+function test(versionSpec) {
+    core.info(`Testing gop ${versionSpec} ...`);
+    core.info(`PATH: ${process.env.PATH}`);
+    const out = (0, child_process_1.execSync)('gop env GOPVERSION', { env: process.env });
+    const actualVersion = out.toString().trim();
+    if (actualVersion !== versionSpec) {
+        throw new Error(`Installed gop version ${actualVersion} does not match expected version ${versionSpec}`);
+    }
+    core.info(`Installed gop version ${actualVersion}`);
+}
 function resolveVersionInput() {
     let version = core.getInput('gop-version');
     const versionFilePath = core.getInput('gop-version-file');
