@@ -51,10 +51,6 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - name: 'Setup Node.js'
-      uses: 'actions/setup-node@v3'
-      with:
-        node-version: '20'
     - uses: 'actions/setup-go@v4'
     - name: 'Setup Go+'
       run: node dist/index/index.js
