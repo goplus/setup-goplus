@@ -21,7 +21,7 @@ Version matching by [SemVer spec](https://github.com/npm/node-semver):
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: cpunion/setup-goplus@v1
+  - uses: goplus/setup-goplus@v1
     with:
       go-version: '1.21.0'
       gop-version: '1.1.7' # The Go version to download (if necessary) and use.
