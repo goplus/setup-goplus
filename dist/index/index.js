@@ -65053,6 +65053,7 @@ function clone(versionSpec) {
 }
 function install(gopDir) {
     core.info(`Installing gop ${gopDir} ...`);
+    (0, child_process_1.execSync)('which go', { stdio: 'inherit' });
     (0, child_process_1.execSync)('go run cmd/make.go -install', { cwd: gopDir, stdio: 'inherit' });
     core.info('gop installed');
 }
