@@ -49,7 +49,9 @@ outputs:
   cache-hit:
     description: 'A boolean value to indicate if a cache was hit'
 runs:
-  using: 'node20'
-  main: 'dist/index/index.js'
-  post: 'dist/cache-save/index.js'
-  post-if: success()
+  using: 'composite'
+  steps:
+    - uses: 'actions/setup-go@v4'
+    - name: 'Setup Go+'
+      run: node dist/index.js
+      shell: bash
