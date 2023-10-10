@@ -11,7 +11,7 @@ import { execSync } from 'child_process'
 export async function installGop(): Promise<void> {
   try {
     const versionSpec = resolveVersionInput()
-    const gopDir = clone(versionSpec)
+    const gopDir = clone(versionSpec || 'v1.1.7')
     install(gopDir)
     test(versionSpec)
     core.setOutput('gop-version', versionSpec)
@@ -51,7 +51,7 @@ function install(gopDir: string): void {
 }
 
 function test(versionSpec: string): void {
-  const out = execSync('gop env GOPVERSION', { stdio: 'inherit' })
+  const out = execSync('gop env GOPVERSION')
   const actualVersion = out.toString().trim()
   if (actualVersion !== versionSpec) {
     throw new Error(

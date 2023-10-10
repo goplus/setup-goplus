@@ -65026,7 +65026,7 @@ const child_process_1 = __nccwpck_require__(81);
 async function installGop() {
     try {
         const versionSpec = resolveVersionInput();
-        const gopDir = clone(versionSpec);
+        const gopDir = clone(versionSpec || 'v1.1.7');
         install(gopDir);
         test(versionSpec);
         core.setOutput('gop-version', versionSpec);
@@ -65066,7 +65066,7 @@ function install(gopDir) {
     core.info('gop installed');
 }
 function test(versionSpec) {
-    const out = (0, child_process_1.execSync)('gop env GOPVERSION', { stdio: 'inherit' });
+    const out = (0, child_process_1.execSync)('gop env GOPVERSION');
     const actualVersion = out.toString().trim();
     if (actualVersion !== versionSpec) {
         throw new Error(`Installed gop version ${actualVersion} does not match expected version ${versionSpec}`);
