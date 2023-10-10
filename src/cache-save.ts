@@ -1,10 +1,10 @@
 /**
  * The entrypoint for the action.
  */
-import { cacheSaveGo } from './setup-go/cache-save'
+import cacheSaveGo from './setup-go/cache-save'
 
-async function run() {
-  await cacheSaveGo()
+function run(): void {
+  cacheSaveGo()
 }
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises

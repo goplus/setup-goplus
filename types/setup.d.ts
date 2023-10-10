@@ -1,1 +1,1 @@
-export function setupGo(): Promise<void>
+export default function setupGo(): Promise<void>

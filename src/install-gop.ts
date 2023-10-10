@@ -7,11 +7,9 @@ import path from 'path'
  * @returns {Promise<void>} Resolves when the action is complete.
  */
 export async function installGop(): Promise<void> {
-  console.log('run =====')
   try {
     const versionSpec = resolveVersionInput()
     core.setOutput('gop-version', versionSpec)
-    console.log('after run =====')
   } catch (error) {
     // Fail the workflow run if an error occurs
     if (error instanceof Error) core.setFailed(error.message)

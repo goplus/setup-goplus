@@ -40,6 +40,9 @@ inputs:
       'Target architecture for Go to use. Examples: x86, x64. Will use system
       architecture by default.'
 outputs:
+  gop-version:
+    description:
+      'The installed Go+ version. Useful when given a version range as input.'
   go-version:
     description:
       'The installed Go version. Useful when given a version range as input.'
