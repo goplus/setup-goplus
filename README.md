@@ -24,6 +24,6 @@ steps:
   - uses: goplus/setup-goplus@v1
     with:
       go-version: '1.21.0'
-      gop-version: '1.1.7' # The Go version to download (if necessary) and use.
+      gop-version: '1.1.7' # The Go+ version to download (if necessary) and use.
   - run: gop version
 ```
