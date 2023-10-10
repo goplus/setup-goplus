@@ -1,11 +1,9 @@
 /**
  * The entrypoint for the action.
  */
-import setupGo from './setup-go/setup'
 import { installGop } from './install-gop'
 
 async function run(): Promise<void> {
-  setupGo()
   await installGop()
 }
 

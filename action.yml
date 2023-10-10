@@ -49,7 +49,21 @@ outputs:
   cache-hit:
     description: 'A boolean value to indicate if a cache was hit'
 runs:
-  using: 'node20'
-  main: 'dist/index/index.js'
-  post: 'dist/cache-save/index.js'
-  post-if: success()
+  using: 'composite'
+  steps:
+    - name: 'Setup Go'
+      uses: 'actions/setup-go@v1'
+      with:
+        go-version: ${{ inputs.go-version }}
+        go-version-file: ${{ inputs.go-version-file }}
+        check-latest: ${{ inputs.check-latest }}
+        token: ${{ inputs.token }}
+        cache: ${{ inputs.cache }}
+        cache-dependency-path: ${{ inputs.cache-dependency-path }}
+        architecture: ${{ inputs.architecture }}
+    - name: 'Setup Go+'
+      using: 'node20'
+      main: 'dist/index/index.js'
+      with:
+        gop-version: ${{ inputs.gop-version }}
+        gop-version-file: ${{ inputs.gop-version-file }}
