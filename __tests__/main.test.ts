@@ -28,7 +28,7 @@ describe('action', () => {
     getInputMock.mockImplementation((name: string): string => {
       switch (name) {
         case 'gop-version':
-          return 'v1.1.7'
+          return '1.1.7'
         default:
           return ''
       }
@@ -38,6 +38,6 @@ describe('action', () => {
 
     expect(installGopMock).toHaveReturned()
 
-    expect(setOutputMock).toHaveBeenCalledWith('gop-version', 'v1.1.7')
+    expect(setOutputMock).toHaveBeenCalledWith('gop-version', '1.1.7')
   })
 })
