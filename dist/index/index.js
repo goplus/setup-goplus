@@ -65053,8 +65053,14 @@ function clone(versionSpec) {
 }
 function install(gopDir) {
     core.info(`Installing gop ${gopDir} ...`);
-    (0, child_process_1.execSync)('which go', { stdio: 'inherit' });
-    (0, child_process_1.execSync)('go run cmd/make.go -install', { cwd: gopDir, stdio: 'inherit' });
+    (0, child_process_1.execSync)('go run cmd/make.go -install', {
+        cwd: gopDir,
+        stdio: 'inherit',
+        env: {
+            ...process.env,
+            GOBIN: '/usr/bin'
+        }
+    });
     core.info('gop installed');
 }
 function test(versionSpec) {
