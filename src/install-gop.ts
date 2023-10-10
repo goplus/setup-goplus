@@ -11,7 +11,7 @@ import { execSync } from 'child_process'
 export async function installGop(): Promise<void> {
   try {
     const versionSpec = resolveVersionInput()
-    const gopDir = clone(versionSpec || 'v1.1.7')
+    const gopDir = clone(versionSpec)
     install(gopDir)
     test(versionSpec)
     core.setOutput('gop-version', versionSpec)
@@ -37,7 +37,7 @@ function clone(versionSpec: string): string {
 
 function install(gopDir: string): void {
   core.info(`Installing gop ${gopDir} ...`)
-  const bin = path.join(os.homedir(), 'bin')
+  const bin = path.join(gopDir, 'bin')
   execSync('go run cmd/make.go -install', {
     cwd: gopDir,
     stdio: 'inherit',
@@ -51,7 +51,7 @@ function install(gopDir: string): void {
 }
 
 function test(versionSpec: string): void {
-  const out = execSync('gop env GOPVERSION')
+  const out = execSync('gop env GOPVERSION', { env: process.env })
   const actualVersion = out.toString().trim()
   if (actualVersion !== versionSpec) {
     throw new Error(

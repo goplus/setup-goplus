@@ -65026,7 +65026,7 @@ const child_process_1 = __nccwpck_require__(81);
 async function installGop() {
     try {
         const versionSpec = resolveVersionInput();
-        const gopDir = clone(versionSpec || 'v1.1.7');
+        const gopDir = clone(versionSpec);
         install(gopDir);
         test(versionSpec);
         core.setOutput('gop-version', versionSpec);
@@ -65053,7 +65053,7 @@ function clone(versionSpec) {
 }
 function install(gopDir) {
     core.info(`Installing gop ${gopDir} ...`);
-    const bin = path_1.default.join(os_1.default.homedir(), 'bin');
+    const bin = path_1.default.join(gopDir, 'bin');
     (0, child_process_1.execSync)('go run cmd/make.go -install', {
         cwd: gopDir,
         stdio: 'inherit',
@@ -65066,7 +65066,7 @@ function install(gopDir) {
     core.info('gop installed');
 }
 function test(versionSpec) {
-    const out = (0, child_process_1.execSync)('gop env GOPVERSION');
+    const out = (0, child_process_1.execSync)('gop env GOPVERSION', { env: process.env });
     const actualVersion = out.toString().trim();
     if (actualVersion !== versionSpec) {
         throw new Error(`Installed gop version ${actualVersion} does not match expected version ${versionSpec}`);
