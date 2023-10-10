@@ -65053,12 +65053,14 @@ function clone(versionSpec) {
 }
 function install(gopDir) {
     core.info(`Installing gop ${gopDir} ...`);
+    (0, child_process_1.execSync)(`ls ${os_1.default.homedir()}`);
+    const bin = path_1.default.join(os_1.default.homedir(), 'bin');
     (0, child_process_1.execSync)('go run cmd/make.go -install', {
         cwd: gopDir,
         stdio: 'inherit',
         env: {
             ...process.env,
-            GOBIN: '/usr/bin'
+            GOBIN: bin
         }
     });
     core.info('gop installed');
