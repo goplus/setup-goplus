@@ -37,8 +37,14 @@ function clone(versionSpec: string): string {
 
 function install(gopDir: string): void {
   core.info(`Installing gop ${gopDir} ...`)
-  execSync('which go', { stdio: 'inherit' })
-  execSync('go run cmd/make.go -install', { cwd: gopDir, stdio: 'inherit' })
+  execSync('go run cmd/make.go -install', {
+    cwd: gopDir,
+    stdio: 'inherit',
+    env: {
+      ...process.env,
+      GOBIN: '/usr/bin'
+    }
+  })
   core.info('gop installed')
 }
 
