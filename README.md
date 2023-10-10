@@ -7,13 +7,16 @@ in actions by:
   `PATH`.
 - Registering problem matchers for error output.
 
-# V1
+## V1
 
-Supports `gop-version`.
+- Supports `gop-version` and `go-version`
+- Supports SemVer.
 
 Ths action installs Go, and then installs Go+ using `git`.
 
-Version matching by [semver spec](https://github.com/npm/node-semver):
+## Usage
+
+Version matching by [SemVer spec](https://github.com/npm/node-semver):
 
 ```yaml
 steps:
