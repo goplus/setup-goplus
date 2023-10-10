@@ -37,7 +37,7 @@ function clone(versionSpec: string): string {
 
 function install(gopDir: string): void {
   core.info(`Installing gop ${gopDir} ...`)
-  const bin = path.join(gopDir, 'bin')
+  const bin = path.join(os.homedir(), 'bin')
   execSync('go run cmd/make.go -install', {
     cwd: gopDir,
     stdio: 'inherit',
@@ -51,6 +51,8 @@ function install(gopDir: string): void {
 }
 
 function test(versionSpec: string): void {
+  core.info(`Testing gop ${versionSpec} ...`)
+  core.info(`PATH: ${process.env.PATH}`)
   const out = execSync('gop env GOPVERSION', { env: process.env })
   const actualVersion = out.toString().trim()
   if (actualVersion !== versionSpec) {

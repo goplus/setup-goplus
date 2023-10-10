@@ -65053,7 +65053,7 @@ function clone(versionSpec) {
 }
 function install(gopDir) {
     core.info(`Installing gop ${gopDir} ...`);
-    const bin = path_1.default.join(gopDir, 'bin');
+    const bin = path_1.default.join(os_1.default.homedir(), 'bin');
     (0, child_process_1.execSync)('go run cmd/make.go -install', {
         cwd: gopDir,
         stdio: 'inherit',
@@ -65066,6 +65066,8 @@ function install(gopDir) {
     core.info('gop installed');
 }
 function test(versionSpec) {
+    core.info(`Testing gop ${versionSpec} ...`);
+    core.info(`PATH: ${process.env.PATH}`);
     const out = (0, child_process_1.execSync)('gop env GOPVERSION', { env: process.env });
     const actualVersion = out.toString().trim();
     if (actualVersion !== versionSpec) {
