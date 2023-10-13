@@ -53,10 +53,5 @@ runs:
   steps:
     - uses: 'actions/setup-go@v4'
     - name: 'Setup Go+'
-      run: |
-        pwd
-        ls
-        ls dist/
-        echo ${{ github.action_path }}
-        node ${{ github.action_path }}/dist/index.js
+      run: node $GITHUB_ACTION_PATH/dist/index.js
       shell: bash
