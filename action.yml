@@ -57,5 +57,6 @@ runs:
         pwd
         ls
         ls dist/
+        echo ${{ github.action_path }}
         node ${{ github.action_path }}/dist/index.js
       shell: bash
