@@ -75,7 +75,7 @@ function test(versionSpec: string): void {
 }
 
 function fetchVersions(): string[] {
-  const cmd = `git -c 'versionsort.suffix=-' ls-remote --tags --sort='v:refname' ${GOPLUS_REPO}`
+  const cmd = `git -c versionsort.suffix=- ls-remote --tags --sort=v:refname ${GOPLUS_REPO}`
   const out = execSync(cmd).toString()
   const versions = out
     .split('\n')
