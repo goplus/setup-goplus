@@ -6091,7 +6091,7 @@ function test(versionSpec) {
     core.info(`Installed gop version ${actualVersion}`);
 }
 function fetchVersions() {
-    const cmd = `git -c 'versionsort.suffix=-' ls-remote --tags --sort='v:refname' ${GOPLUS_REPO}`;
+    const cmd = `git -c versionsort.suffix=- ls-remote --tags --sort=v:refname ${GOPLUS_REPO}`;
     const out = (0, child_process_1.execSync)(cmd).toString();
     const versions = out
         .split('\n')
