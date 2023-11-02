@@ -6110,8 +6110,8 @@ function fetchVersions() {
     return versions;
 }
 function resolveVersionInput() {
-    let version = process.env['gop-version'];
-    const versionFilePath = process.env['gop-version-file'];
+    let version = process.env['INPUT_GOP_VERSION'];
+    const versionFilePath = process.env['INPUT_GOP_VERSION_FILE'];
     if (version && versionFilePath) {
         core.warning('Both gop-version and gop-version-file inputs are specified, only gop-version will be used');
     }

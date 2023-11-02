@@ -95,8 +95,8 @@ function fetchVersions(): string[] {
 }
 
 function resolveVersionInput(): string | undefined {
-  let version = process.env['gop-version']
-  const versionFilePath = process.env['gop-version-file']
+  let version = process.env['INPUT_GOP_VERSION']
+  const versionFilePath = process.env['INPUT_GOP_VERSION_FILE']
 
   if (version && versionFilePath) {
     core.warning(
