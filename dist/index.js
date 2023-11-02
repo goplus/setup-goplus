@@ -6036,6 +6036,7 @@ async function installGop() {
     try {
         const versionSpec = resolveVersionInput() || '';
         const versions = semver.rsort(fetchVersions().filter(v => semver.valid(v)));
+        core.info(JSON.stringify(process.env, undefined, 4));
         core.info(versions.join('\n'));
         let version = null;
         if (!versionSpec || versionSpec === 'latest') {
