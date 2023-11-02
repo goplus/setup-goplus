@@ -6036,11 +6036,11 @@ async function installGop() {
     try {
         const versionSpec = resolveVersionInput() || '';
         const versions = semver.sort(fetchVersions());
-        console.log(versions);
+        core.debug(versions.join('\n'));
         let version = null;
         if (!versionSpec) {
-            core.warning('No gop-version specified, using latest version');
             version = versions[versions.length - 1];
+            core.warning(`No gop-version specified, using latest version: ${version}`);
         }
         else {
             version = semver.maxSatisfying(versions, versionSpec);
