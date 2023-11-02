@@ -6035,10 +6035,10 @@ const GOPLUS_REPO = 'https://github.com/goplus/gop.git';
 async function installGop() {
     try {
         const versionSpec = resolveVersionInput() || '';
-        const versions = semver.sort(fetchVersions().filter(v => semver.valid(v)));
+        const versions = semver.rsort(fetchVersions().filter(v => semver.valid(v)));
         core.info(versions.join('\n'));
         let version = null;
-        if (!versionSpec) {
+        if (!versionSpec || versionSpec === 'latest') {
             version = versions[0];
             core.warning(`No gop-version specified, using latest version: ${version}`);
         }
