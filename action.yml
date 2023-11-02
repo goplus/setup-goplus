@@ -64,6 +64,3 @@ runs:
     - name: 'Setup Go+'
       run: node $GITHUB_ACTION_PATH/dist/index.js
       shell: bash
-      with:
-        gop-version: ${{ inputs.gop-version }}
-        gop-version-file: ${{ inputs.gop-version-file }}
