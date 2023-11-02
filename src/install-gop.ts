@@ -15,10 +15,10 @@ export async function installGop(): Promise<void> {
   try {
     const versionSpec = resolveVersionInput() || ''
     const versions = semver.sort(fetchVersions())
-    core.debug(versions.join('\n'))
+    core.info(versions.join('\n'))
     let version: string | null = null
     if (!versionSpec) {
-      version = versions[versions.length - 1]
+      version = versions[0]
       core.warning(`No gop-version specified, using latest version: ${version}`)
     } else {
       version = semver.maxSatisfying(versions, versionSpec)
