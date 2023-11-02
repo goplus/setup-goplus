@@ -12,9 +12,12 @@ const GOPLUS_REPO = 'https://github.com/goplus/gop.git'
  * @returns {Promise<void>} Resolves when the action is complete.
  */
 export async function installGop(): Promise<void> {
-  console.log('==== ENV:', process.env)
   try {
-    const versionSpec = resolveVersionInput() || 'latest'
+    let versionSpec = resolveVersionInput()
+    if (!versionSpec) {
+      core.warning('No gop-version specified, using latest version')
+      versionSpec = 'latest'
+    }
     const versions = fetchVersions()
     const version = semver.maxSatisfying(versions, versionSpec)
     if (!version) {
@@ -86,9 +89,9 @@ function fetchVersions(): string[] {
   return versions
 }
 
-function resolveVersionInput(): string {
-  let version = core.getInput('gop-version')
-  const versionFilePath = core.getInput('gop-version-file')
+function resolveVersionInput(): string | undefined {
+  let version = process.env['gop-version']
+  const versionFilePath = process.env['gop-version-file']
 
   if (version && versionFilePath) {
     core.warning(
