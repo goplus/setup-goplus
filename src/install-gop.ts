@@ -14,7 +14,7 @@ const GOPLUS_REPO = 'https://github.com/goplus/gop.git'
 export async function installGop(): Promise<void> {
   try {
     const versionSpec = resolveVersionInput() || ''
-    const versions = semver.sort(fetchVersions())
+    const versions = semver.sort(fetchVersions().filter(v => semver.valid(v)))
     core.info(versions.join('\n'))
     let version: string | null = null
     if (!versionSpec) {
