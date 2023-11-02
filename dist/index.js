@@ -6034,13 +6034,17 @@ const GOPLUS_REPO = 'https://github.com/goplus/gop.git';
  */
 async function installGop() {
     try {
-        let versionSpec = resolveVersionInput();
+        const versionSpec = resolveVersionInput() || '';
+        const versions = semver.sort(fetchVersions());
+        console.log(versions);
+        let version = null;
         if (!versionSpec) {
             core.warning('No gop-version specified, using latest version');
-            versionSpec = 'latest';
+            version = versions[versions.length - 1];
         }
-        const versions = fetchVersions();
-        const version = semver.maxSatisfying(versions, versionSpec);
+        else {
+            version = semver.maxSatisfying(versions, versionSpec);
+        }
         if (!version) {
             throw new Error(`Unable to find a version that satisfies the version spec '${versionSpec}'`);
         }
