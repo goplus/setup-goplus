@@ -6034,9 +6034,16 @@ const GOPLUS_REPO = 'https://github.com/goplus/gop.git';
  */
 async function installGop() {
     try {
-        const versionSpec = resolveVersionInput() || '1.1';
-        const versions = fetchVersions();
-        const version = semver.maxSatisfying(versions, versionSpec);
+        const versionSpec = resolveVersionInput() || '';
+        const versions = semver.rsort(fetchVersions().filter(v => semver.valid(v)));
+        let version = null;
+        if (!versionSpec || versionSpec === 'latest') {
+            version = versions[0];
+            core.warning(`No gop-version specified, using latest version: ${version}`);
+        }
+        else {
+            version = semver.maxSatisfying(versions, versionSpec);
+        }
         if (!version) {
             throw new Error(`Unable to find a version that satisfies the version spec '${versionSpec}'`);
         }
@@ -6101,8 +6108,8 @@ function fetchVersions() {
     return versions;
 }
 function resolveVersionInput() {
-    let version = core.getInput('gop-version');
-    const versionFilePath = core.getInput('gop-version-file');
+    let version = process.env['INPUT_GOP_VERSION'];
+    const versionFilePath = process.env['INPUT_GOP_VERSION_FILE'];
     if (version && versionFilePath) {
         core.warning('Both gop-version and gop-version-file inputs are specified, only gop-version will be used');
     }

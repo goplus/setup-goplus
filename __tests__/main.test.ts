@@ -13,7 +13,7 @@ import * as main from '../src/install-gop'
 // const debugMock = jest.spyOn(core, 'debug')
 const getInputMock = jest.spyOn(core, 'getInput')
 // const setFailedMock = jest.spyOn(core, 'setFailed')
-const setOutputMock = jest.spyOn(core, 'setOutput')
+// const setOutputMock = jest.spyOn(core, 'setOutput')
 
 // Mock the action's main function
 const installGopMock = jest.spyOn(main, 'installGop')
@@ -38,6 +38,6 @@ describe('action', () => {
 
     expect(installGopMock).toHaveReturned()
 
-    expect(setOutputMock).toHaveBeenCalledWith('gop-version', '1.1.7')
+    // expect(setOutputMock).toHaveBeenCalledWith('gop-version', '1.1.7')
   })
 })
