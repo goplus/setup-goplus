@@ -101,9 +101,9 @@ jobs:
           VERIFIED: ${{ matrix.gop-version-verified }}
           GOP_VERSION: ${{ matrix.gop-version }}
         run: |
-          echo gop-version: $GOP_VERSION
-          echo gop-version-verified: $VERIFIED
-          if [[ "$VERIFIED" != $VERIFIED ]]; then
+          echo "gop-version: $GOP_VERSION"
+          echo "gop-version-verified: $VERIFIED"
+          if [[ "$VERIFIED" != "$VERIFIED" ]]; then
             echo "gop-version-verified does not match expected value"
             echo "expected: $VERIFIED, got: $VERIFIED"
             exit 1
