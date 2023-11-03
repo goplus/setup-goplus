@@ -71,6 +71,17 @@ jobs:
     strategy:
       matrix:
         gop-version: ['1.1.7', '', 'latest', 'main', 'v1.0']
+        include:
+          - gop-version: '1.1.7'
+            gop-version-verified: 'true'
+          - gop-version: ''
+            gop-version-verified: 'true'
+          - gop-version: 'latest'
+            gop-version-verified: 'true'
+          - gop-version: 'main'
+            gop-version-verified: 'false'
+          - gop-version: 'v1.0'
+            gop-version-verified: 'false'
 
     runs-on: ubuntu-latest
 
@@ -88,15 +99,11 @@ jobs:
       - name: Print Output
         id: output
         run: |
-          echo "${{ steps.test-gop-version.outputs.gop-version }}"
-          if [[ "{{ matrix.gop-version }}" == "1.1.7" ]]; then
-            if [[ "${{ steps.test-gop-version.outputs.gop-version-verified }}" != "true" ]]; then
-              echo "Expected version 1.1.7 to be verified"
-              exit 1
-            fi
-          else
-            if [[ "${{ steps.test-gop-version.outputs.gop-version-verified }}" == "true" ]]; then
-              echo "Expected version 1.1.7 to not be verified"
-              exit 1
-            fi
+          echo "gop-version: {{ steps.test-gop-version.outputs.gop-version }}"
+          echo "gop-version-verified: {{ steps.test-gop-version.outputs.gop-version-verified }}"
+          export VERIFIED=$(echo "{{ matrix.gop-version-verified }}") 
+          if [[ "{{ matrix.gop-version-verified }}" != $VERIFIED ]]; then
+            echo "gop-version-verified does not match expected value"
+            echo "expected: {{ matrix.gop-version-verified }}, got: $VERIFIED"
+            exit 1
           fi
