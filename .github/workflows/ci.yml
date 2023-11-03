@@ -96,14 +96,15 @@ jobs:
         with:
           gop-version: ${{ matrix.gop-version }}
 
-      - name: Print Output
-        id: output
+      - name: Test version verified
+        env:
+          VERIFIED: ${{ matrix.gop-version-verified }}
+          GOP_VERSION: ${{ matrix.gop-version }}
         run: |
-          echo "gop-version: {{ steps.test-gop-version.outputs.gop-version }}"
-          echo "gop-version-verified: {{ steps.test-gop-version.outputs.gop-version-verified }}"
-          export VERIFIED=$(echo "{{ matrix.gop-version-verified }}") 
-          if [[ "{{ matrix.gop-version-verified }}" != $VERIFIED ]]; then
+          echo gop-version: $GOP_VERSION
+          echo gop-version-verified: $VERIFIED
+          if [[ "$VERIFIED" != $VERIFIED ]]; then
             echo "gop-version-verified does not match expected value"
-            echo "expected: {{ matrix.gop-version-verified }}, got: $VERIFIED"
+            echo "expected: $VERIFIED, got: $VERIFIED"
             exit 1
           fi
