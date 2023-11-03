@@ -43,6 +43,10 @@ outputs:
   gop-version:
     description:
       'The installed Go+ version. Useful when given a version range as input.'
+  gop-version-verified:
+    description:
+      Whether the installed Go+ version checked, true if the installed version
+      is in the tags, false otherwise.
   go-version:
     description:
       'The installed Go version. Useful when given a version range as input.'

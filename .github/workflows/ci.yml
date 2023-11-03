@@ -64,3 +64,39 @@ jobs:
       - name: Print Output
         id: output
         run: echo "${{ steps.test-action.outputs.gop-version }}"
+
+  test-versions:
+    name: Gop Versions Test
+
+    strategy:
+      matrix:
+        gop-version: ['1.1.7', '', 'latest', 'main', 'v1.0']
+
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout
+          id: checkout
+          uses: actions/checkout@v4
+
+        - name: Test Gop Version
+          id: test-gop-version
+          uses: ./
+          with:
+            gop-version: ${{ matrix.gop-version }}
+
+        - name: Print Output
+          id: output
+          run: |
+            echo "${{ steps.test-gop-version.outputs.gop-version }}"
+            if [[ "{{ matrix.gop-version }}" == "1.1.7" ]]; then
+              if [[ "${{ steps.test-gop-version.outputs.gop-version-verified }}" != "true" ]]; then
+                echo "Expected version 1.1.7 to be verified"
+                exit 1
+              fi
+            else
+              if [[ "${{ steps.test-gop-version.outputs.gop-version-verified }}" == "true" ]]; then
+                echo "Expected version 1.1.7 to not be verified"
+                exit 1
+              fi
+            fi
